@@ -510,7 +510,7 @@ This service describes motorized window coverings or shades - examples include s
 }
 ```
 * `item`: The openHAB item representing the window covering, receiving commands about the target position and determining the current position (if `stateItem` is not set)
-  * Needs to be of type `Rollershutter`, `Number` or `Switch` within openHAB
+  * Needs to be of type `Rollershutter`, `Number`, `Dimmer`  or `Switch` within openHAB
 * `inverted` *(optional)*: If `item`'s state needs to be interpreted inverted, set this value to `"true"` 
   * Default: `"false"`
   * Allowed values: `"true"` & `"false"` *don't forget the quotes*
@@ -518,7 +518,7 @@ This service describes motorized window coverings or shades - examples include s
   * Default: `"1"`
   * Needs to be a number *don't forget the quotes*
 * `stateItem` *(optional)*: The openHAB item, used to determine the state of the window covering instead of `item`'s state
-  * Needs to be of type `Rollershutter`, `Number`, `Switch` or `Contact` within openHAB
+  * Needs to be of type `Rollershutter`, `Number`, `Dimmer`, `Switch` or `Contact` within openHAB
 * `stateItemInverted` *(optional)*: If `stateItem`'s state needs to be interpreted inverted, set this value to `"true"` 
   * Default: `"false"`
   * Allowed values: `"true"` & `"false"` *don't forget the quotes*

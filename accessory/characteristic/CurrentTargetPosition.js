@@ -17,11 +17,11 @@ function addCurrentPositionCharacteristic(service) {
     let item, itemType, inverted, multiplier;
     let manuMode = this._checkInvertedConf(CURRENT_TARGET_POSITION_CONFIG.manuMode);
     if(this._config[CURRENT_TARGET_POSITION_CONFIG.stateItem]) {
-        [item, itemType] = this._getAndCheckItemType(CURRENT_TARGET_POSITION_CONFIG.stateItem, ['Rollershutter', 'Number', 'Switch', 'Contact']);
+        [item, itemType] = this._getAndCheckItemType(CURRENT_TARGET_POSITION_CONFIG.stateItem, ['Rollershutter', 'Number', 'Switch', 'Dimmer', 'Contact']);
         inverted = this._checkInvertedConf(CURRENT_TARGET_POSITION_CONFIG.stateItemInverted);
         multiplier = this._checkMultiplierConf(CURRENT_TARGET_POSITION_CONFIG.stateItemMultiplier, itemType);
     } else {
-        [item, itemType] = this._getAndCheckItemType(CURRENT_TARGET_POSITION_CONFIG.item, ['Rollershutter', 'Number', 'Switch']);
+        [item, itemType] = this._getAndCheckItemType(CURRENT_TARGET_POSITION_CONFIG.item, ['Rollershutter', 'Number', 'Switch', 'Dimmer']);
         inverted = this._checkInvertedConf(CURRENT_TARGET_POSITION_CONFIG.inverted);
         multiplier = this._checkMultiplierConf(CURRENT_TARGET_POSITION_CONFIG.multiplier, itemType);
     }
@@ -41,13 +41,13 @@ function addCurrentPositionCharacteristic(service) {
 }
 
 function addTargetPositionCharacteristic(service) {
-    let [item, itemType] = this._getAndCheckItemType(CURRENT_TARGET_POSITION_CONFIG.item, ['Rollershutter', 'Number', 'Switch']);
+    let [item, itemType] = this._getAndCheckItemType(CURRENT_TARGET_POSITION_CONFIG.item, ['Rollershutter', 'Number', 'Switch', 'Dimmer']);
     let inverted = this._checkInvertedConf(CURRENT_TARGET_POSITION_CONFIG.inverted);
     let multiplier = this._checkMultiplierConf(CURRENT_TARGET_POSITION_CONFIG.multiplier, itemType);
     let stateItem, stateItemType, stateItemInverted, stateItemMultiplier;
 
     if(this._config[CURRENT_TARGET_POSITION_CONFIG.stateItem]) {
-        [stateItem, stateItemType] = this._getAndCheckItemType(CURRENT_TARGET_POSITION_CONFIG.stateItem, ['Rollershutter', 'Number', 'Switch', 'Contact']);
+        [stateItem, stateItemType] = this._getAndCheckItemType(CURRENT_TARGET_POSITION_CONFIG.stateItem, ['Rollershutter', 'Number', 'Switch', 'Dimmer', 'Contact']);
         stateItemInverted = this._checkInvertedConf(CURRENT_TARGET_POSITION_CONFIG.stateItemInverted);
         stateItemMultiplier = this._checkMultiplierConf(CURRENT_TARGET_POSITION_CONFIG.stateItemMultiplier, stateItemType);
     } else {
@@ -134,6 +134,7 @@ function positionTransformation(multiplier, targetStateCharacteristic, type, inv
         case 'RollershutterSetter':
         case 'Rollershutter':
         case 'Number':
+        case 'Dimmer':            
             //This part is only invoked if this is used in a setter context and the item is a rollershutter
             if(type === 'RollershutterSetter' && value === 100) {
                 transformedValue = 'UP';
